@@ -3,7 +3,8 @@ const path = require('path');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 3000; // El || 3000 evita errores si el .env falla
+const PORT = process.env.PORT || 4000;
+ // El || 3000 evita errores si el .env falla
 
 // Esto sirve tu carpeta public (el frontend)
 app.use(express.static(path.join(__dirname, 'public')));
