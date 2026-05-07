@@ -1,20 +1,18 @@
 const express = require('express');
 const path = require('path');
-require('dotenv').config();
-
 const app = express();
-const PORT = process.env.PORT || 4000;
- // El || 3000 evita errores si el .env falla
 
-// Esto sirve tu carpeta public (el frontend)
+// Render asigna el puerto, si no usa el 10000
+const PORT = process.env.PORT || 10000;
+
+// Servir frontend
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Si quieres el mensaje de "Bienvenido" en la consola al entrar a la web
-app.get('/', (req, res, next) => {
-    console.log('Bienvenido al curso');
-    next();
+// Ruta de prueba para ver si el servidor responde
+app.get('/ping', (req, res) => {
+    res.send('Servidor vivo');
 });
 
 app.listen(PORT, '0.0.0.0', () => {
-    console.log("Aplicacion corriendo en el puerto: " + PORT);
+    console.log(`Servidor escuchando en puerto ${PORT}`);
 });
