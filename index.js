@@ -1,14 +1,19 @@
-require('dotenv').config()
-const http= require('http')
+const express = require('express');
+const path = require('path');
+require('dotenv').config();
 
-function requestController(){
-    console.log('Bienvenido al curso')
-}
+const app = express();
+const PORT = process.env.PORT || 3000; // El || 3000 evita errores si el .env falla
 
-const server=http.createServer(requestController)
+// Esto sirve tu carpeta public (el frontend)
+app.use(express.static(path.join(__dirname, 'public')));
 
-const PORT=process.env.PORT
+// Si quieres el mensaje de "Bienvenido" en la consola al entrar a la web
+app.get('/', (req, res, next) => {
+    console.log('Bienvenido al curso');
+    next();
+});
 
-server.listen(PORT, function(){
-    console.log("Aplicacion corriendo en: "+ PORT)
-})
+app.listen(PORT, () => {
+    console.log("Aplicacion corriendo en el puerto: " + PORT);
+});
